@@ -127,6 +127,10 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\clrmotld\clrmotld.vcxproj">
+      <Project>{4495a5a5-474f-4e42-b419-a11d3f8232b3}</Project>
+      <Name>clrmotld</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JypeliOpenTLDContent\JypeliOpenTLDContent.contentproj">
       <Name>JypeliOpenTLDContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>

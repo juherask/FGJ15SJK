@@ -9,7 +9,7 @@ using System.Threading;
 // This code is from:
 // https://gist.github.com/Iridio/3806209
 // With some changes to support Jypeli.
-// Thank you github user Iridio.
+// Thank you github user Iridio (Alessandro Colla).
 */
 public class VideoCapture : ISampleGrabberCB, IDisposable
 {
@@ -33,18 +33,93 @@ public class VideoCapture : ISampleGrabberCB, IDisposable
         }
     }
 
-    protected ICaptureGraphBuilder2 CaptureGraphBuilder;
+    public byte[] HalfGrayscale
+    {
+        get
+        {
+            lock (lockObj)
+            {
+                int samplePosGray = 0;
+                int samplePosRGB24 = 0;
+                for (int y = 0, y2 = Height / 2 - 1; y < Height / 2; y++, y2--)
+                {
+                    for (int x = 0; x < Width / 2; x++)
+                    {
+                        samplePosGray = (((y2 * Width/2) + x));
+                        samplePosRGB24 = ((y*2 * Width) + (Width - x*2 - 1)) * 3;
+                        FrameHalfGrayscale[samplePosGray] = (byte)((FrameBGR[samplePosRGB24 + 2] + FrameBGR[samplePosRGB24 + 1] + FrameBGR[samplePosRGB24 + 0]) * 1.0 / 3.0);
+                    }
+                }
+            }
+            return FrameHalfGrayscale;
+        }
+    }
+    public byte[] QuarterGrayscale
+    {
+        get
+        {
+            lock (lockObj)
+            {
+                int samplePosGray = 0;
+                int samplePosRGB24 = 0;
+                for (int y = 0, y2 = Height / 4 - 1; y < Height / 4; y++, y2--)
+                {
+                    for (int x = 0; x < Width / 4; x++)
+                    {
+                        samplePosGray = (((y2 * Width / 4) + x));
+                        samplePosRGB24 = ((y * 4 * Width) + (Width - x * 4 - 1)) * 3;
+                        FrameQuarterGrayscale[samplePosGray] = (byte)((FrameBGR[samplePosRGB24 + 2] + FrameBGR[samplePosRGB24 + 1] + FrameBGR[samplePosRGB24 + 0]) * 1.0 / 3.0);
+                    }
+                }
+            }
+            return FrameQuarterGrayscale;
+        }
+    }
+
+
+
+    public byte[] Grayscale
+    {
+        get
+        {
+            lock (lockObj)
+            {
+                int samplePosGray = 0;
+                int samplePosRGB24 = 0;
+                for (int y = 0, y2 = Height - 1; y < Height; y++, y2--)
+                {
+                    for (int x = 0; x < Width; x++)
+                    {
+                        samplePosGray = (((y2 * Width) + x));
+                        samplePosRGB24 = ((y * Width) + (Width - x - 1)) * 3;
+                        FrameGrayscale[samplePosGray] = (byte)((FrameBGR[samplePosRGB24 + 2] + FrameBGR[samplePosRGB24 + 1] + FrameBGR[samplePosRGB24 + 0]) * 1.0 / 3.0);
+                     
+                    }
+                }
+            }
+            return FrameGrayscale;
+        }
+    }
+
+
+    // Buffers
     protected Texture2D frame;
     protected byte[] FrameBGR;
     protected byte[] FrameRGBA;
+    protected byte[] FrameGrayscale;
+    protected byte[] FrameHalfGrayscale;
+    protected byte[] FrameQuarterGrayscale;
+
+    // State and grabbers
     protected bool FrameReady;
+    protected ICaptureGraphBuilder2 CaptureGraphBuilder;
     protected IGraphBuilder GraphBuilder;
     protected GraphicsDevice GraphicsDevice;
     protected IMediaControl MediaControl;
     protected ISampleGrabber SampleGrabber;
     protected Thread UpdateThread;
-    protected int Width = 640;
-    protected int Height = 480;
+    public const int Width = 640;
+    public const int Height = 480;
     protected int DEVICE_ID = 0;
     bool isRunning;
     static readonly object lockObj = new object();
@@ -55,6 +130,9 @@ public class VideoCapture : ISampleGrabberCB, IDisposable
         frame = new Texture2D(GraphicsDevice, Width, Height, false, SurfaceFormat.Color);
         FrameBGR = new byte[(Width * Height) * 3];
         FrameRGBA = new byte[(Width * Height) * 4];
+        FrameGrayscale = new byte[(Width * Height)];
+        FrameHalfGrayscale = new byte[(Width / 2 * Height / 2)];
+        FrameQuarterGrayscale = new byte[(Width / 4 * Height / 4)];
         GraphBuilder = (IGraphBuilder)new FilterGraph();
         CaptureGraphBuilder = (ICaptureGraphBuilder2)new CaptureGraphBuilder2();
         MediaControl = (IMediaControl)GraphBuilder;
@@ -138,7 +216,6 @@ public class VideoCapture : ISampleGrabberCB, IDisposable
             }
             FrameReady = false;
             while (!FrameReady) Thread.Sleep(20);
-
         }
     }
 

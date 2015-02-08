@@ -954,20 +954,20 @@ void Matrix::drawBox(ObjectBox b, int value)
   if(x2 < 0 || y2 < 0 || x1 >= ivWidth || y1 >= ivHeight)
     return;
   if(y1 >= 0)
-    for(int i = y1 * ivWidth + max(0, x1);
-            i < y1 * ivWidth + min(ivWidth, x2); ++i)
+    for(int i = y1 * ivWidth + std::max(0, x1);
+            i < y1 * ivWidth + std::min(ivWidth, x2); ++i)
       ivData[i] = value;
   if(y2 < ivHeight)
-    for(int i = y2 * ivWidth + max(0, x1);
-            i < y2 * ivWidth + min(ivWidth, x2); ++i)
+	  for (int i = y2 * ivWidth + std::max(0, x1);
+		  i < y2 * ivWidth + std::min(ivWidth, x2); ++i)
       ivData[i] = value;
   if(x1 >= 0)
-    for(int i = max(0, y1) * ivWidth + x1;
-            i < min(ivHeight, y2) * ivWidth + x1; i += ivWidth)
+	  for (int i = std::max(0, y1) * ivWidth + x1;
+		  i < std::min(ivHeight, y2) * ivWidth + x1; i += ivWidth)
       ivData[i] = value;
   if(x2 < ivWidth)
-    for(int i = max(0, y1) * ivWidth + x2;
-            i < min(ivHeight, y2) * ivWidth + x2; i += ivWidth)
+	  for (int i = std::max(0, y1) * ivWidth + x2;
+		  i < std::min(ivHeight, y2) * ivWidth + x2; i += ivWidth)
       ivData[i] = value;
 }
 
@@ -1011,7 +1011,7 @@ void Matrix::drawHistogram(const float * histogram, int x, int y, int value, int
     return;
   for (int n = 0; n < nbins; ++n)
   {
-    int binheight = min(psize, max(0, (int)round(histogram[n] * psize)));
+	  int binheight = std::min(psize, std::max(0, (int)round(histogram[n] * psize)));
     for(int ix = 0; ix < binwidth; ++ix)
       for(int iy = 0; iy < binheight; ++iy)
         (*this)(x+ix+n*binwidth, y+psize-1-iy) = value;

@@ -8,7 +8,7 @@ static class Ohjelma
         using (JypeliOpenTLD game = new JypeliOpenTLD())
         {
 #if !DEBUG
-            game.IsFullScreen = true;
+            game.IsFullScreen = false;
 #endif
             game.Run();
         }

@@ -7,18 +7,48 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JypeliOpenTLD", "JypeliOpen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JypeliOpenTLDContent", "JypeliOpenTLD\JypeliOpenTLDContent\JypeliOpenTLDContent.contentproj", "{1B0C12D1-4A02-4F96-B6EE-B1AB7F25DBDE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clrmotld", "JypeliOpenTLD\clrmotld\clrmotld.vcxproj", "{4495A5A5-474F-4E42-B419-A11D3F8232B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|Win32 = Debug|Win32
 		Debug|x86 = Debug|x86
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|Win32 = Release|Win32
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E715207C-2D78-4718-BA52-77C4F81129CC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{E715207C-2D78-4718-BA52-77C4F81129CC}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E715207C-2D78-4718-BA52-77C4F81129CC}.Debug|Win32.ActiveCfg = Debug|x86
+		{E715207C-2D78-4718-BA52-77C4F81129CC}.Debug|Win32.Build.0 = Debug|x86
 		{E715207C-2D78-4718-BA52-77C4F81129CC}.Debug|x86.ActiveCfg = Debug|x86
 		{E715207C-2D78-4718-BA52-77C4F81129CC}.Debug|x86.Build.0 = Debug|x86
+		{E715207C-2D78-4718-BA52-77C4F81129CC}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E715207C-2D78-4718-BA52-77C4F81129CC}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E715207C-2D78-4718-BA52-77C4F81129CC}.Release|Win32.ActiveCfg = Release|x86
+		{E715207C-2D78-4718-BA52-77C4F81129CC}.Release|Win32.Build.0 = Release|x86
 		{E715207C-2D78-4718-BA52-77C4F81129CC}.Release|x86.ActiveCfg = Release|x86
 		{E715207C-2D78-4718-BA52-77C4F81129CC}.Release|x86.Build.0 = Release|x86
+		{1B0C12D1-4A02-4F96-B6EE-B1AB7F25DBDE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1B0C12D1-4A02-4F96-B6EE-B1AB7F25DBDE}.Debug|Win32.ActiveCfg = Debug|x86
 		{1B0C12D1-4A02-4F96-B6EE-B1AB7F25DBDE}.Debug|x86.ActiveCfg = Debug|x86
+		{1B0C12D1-4A02-4F96-B6EE-B1AB7F25DBDE}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1B0C12D1-4A02-4F96-B6EE-B1AB7F25DBDE}.Release|Win32.ActiveCfg = Release|x86
 		{1B0C12D1-4A02-4F96-B6EE-B1AB7F25DBDE}.Release|x86.ActiveCfg = Release|x86
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Debug|Win32.Build.0 = Debug|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Debug|x86.ActiveCfg = Debug|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Debug|x86.Build.0 = Debug|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Release|Win32.ActiveCfg = Release|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Release|Win32.Build.0 = Release|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Release|x86.ActiveCfg = Release|Win32
+		{4495A5A5-474F-4E42-B419-A11D3F8232B3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

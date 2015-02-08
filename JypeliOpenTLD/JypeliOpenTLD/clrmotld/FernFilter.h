@@ -331,7 +331,7 @@ ScanTime st;
   // STEP 1 - Scan, Filter by Variance
 #pragma omp barrier
 #pragma omp for schedule(dynamic)
-  for (unsigned int i = 0; i < ivScans.size(); ++i)
+  for (int i = 0; i < ivScans.size(); ++i)
     varianceFilter(scaled[i].data(), sats[i], sat2s[i], i, varianceFiltered);
   
 #if DEBUG && TIMING
@@ -342,7 +342,7 @@ ScanTime st;
   // STEP 2 - Calculate Feature Data
 #pragma omp barrier
 #pragma omp for
-  for (unsigned int i = 0; i < varianceFiltered.size(); ++i)
+  for (int i = 0; i < varianceFiltered.size(); ++i)
     extractFeatures(varianceFiltered[i]);
   
 #if DEBUG && TIMING
@@ -354,7 +354,7 @@ ScanTime st;
 #pragma omp barrier
   float confidenceThreshold = CONFIDENCETHRESHOLD * ivNumFerns;
 #pragma omp for
-  for (unsigned int i = 0; i < varianceFiltered.size(); ++i)
+  for (int i = 0; i < varianceFiltered.size(); ++i)
   {
     FernDetection det = varianceFiltered[i];
     det.confidence = calcMaxConfidence(det.featureData);
@@ -380,7 +380,7 @@ ScanTime st;
   else
   {
 #pragma omp for
-    for (unsigned int i = 0; i < fernFiltered1.size(); ++i)
+    for (int i = 0; i < fernFiltered1.size(); ++i)
     {
       FernDetection det = fernFiltered1[i];
       float * confidences = calcConfidences(det.featureData);
@@ -409,7 +409,7 @@ ScanTime st;
   // STEP 5 finally add patches
 #pragma omp barrier
 #pragma omp for
-  for (unsigned int i = 0; i < result.size(); ++i)
+  for (int i = 0; i < result.size(); ++i)
   {
     result[i].patch.copyFromFloatArray(result[i].imageOffset,((ScanSettings*)(result[i].ss))->width,ivPatchSize,ivPatchSize);
   }
@@ -861,7 +861,7 @@ inline void FernFilter::createScaledMatrices(const Matrix& image, Matrix*& scale
 }
 #pragma omp barrier
 #pragma omp for schedule(dynamic)
-  for (unsigned int i = 0; i < ivScans.size(); ++i)
+  for (int i = 0; i < ivScans.size(); ++i)
   {
     createScaledMatrix(image, scaled[i], sats[i], sat2s[i], i);
   }
